@@ -1,59 +1,67 @@
-// import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
-function App() {
-  function submit(){
-    console.log("Given details entered")
-    alert("Successfully Entered")
-  }
+export default function SignUp() {
+  const handleSubmit = (event) => {
+   event.preventDefault();
+    const data = new FormData(event.currentTarget);
+     console.log({
+      firstName:data.get ('firstName'),
+      lastName:data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
 
-  return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-
-    <div className='App'>
-
-      <div>
-        <label>FirstName:</label>
-        <input type='text' />
-      </div>
-      <div>
-        <label>LastName:</label>
-        <input type='text' />
-      </div>
-      <div>
-        <label>Role:</label>
-        <select id="role" name="Role">
-          <option value="Manager">Manager</option>
-          <option value="Developer">Developer</option>
-          <option value="engineer">engineer</option>
-        </select>
-      </div>
-      <script src="index.js"></script>
-
-      <div>
-        <button onClick={submit}>Submit</button> 
-      </div>
-
-    </div>
+    });
+};
+ return (
+  <Container component="main" maxWidth="xs">
+<Typography component="h1" variant="h5">
+   Login 
+    </Typography>
+     <Box component="form"  onSubmit={handleSubmit} >
+  <TextField
+      name="firstName"
+       required
+       fullWidth
+       id="firstName"
+       label="First Name"
+       autoFocus/>
+<TextField
+       required
+       fullWidth
+       id="lastName"
+       label="Last Name"
+       name="lastName"/>
+<TextField
+       required
+       fullWidth
+       id="email"
+       label="Email Address"
+       name="email"
+     />
+<TextField
+       required
+       fullWidth
+       name="password"
+       label="Password"
+       type="password"
+       id="password"
+        />
+<Button
+type="submit"
+fullWidth
+variant="contained"
+>
+Sign Up
+</Button>
+</Box>
+</Container>
 
 
   );
-}
 
-export default App;
+}
