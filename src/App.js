@@ -4,9 +4,14 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+// import  Components  from './components/table';
+import Table from './components/table';
+// import Login from './components/login';
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
+
+
+export default function Submit() {
+const handleSubmit = (event) => {
    event.preventDefault();
     const data = new FormData(event.currentTarget);
      console.log({
@@ -14,11 +19,16 @@ export default function SignUp() {
       lastName:data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
+     
+});
 
-    });
 };
  return (
+
   <Container component="main" maxWidth="xs">
+      <Table/>
+      
+
 <Typography component="h1" variant="h5">
    Login 
     </Typography>
@@ -51,12 +61,15 @@ export default function SignUp() {
        type="password"
        id="password"
         />
+
+  
+
 <Button
 type="submit"
 fullWidth
 variant="contained"
 >
-Sign Up
+Submit
 </Button>
 </Box>
 </Container>
