@@ -1,26 +1,10 @@
 [
     {
-        
-            "id":1,
-            "first_name":"Anisha",
-            "last_name":"J",
-            "email":"ani@gmail.com",
-            "password":"bbb"
-    } , 
-    {
-        
-        "id":2,
-        "first_name":"hari",
-        "last_name":"sudhan",
-        "email":"hari@gmail.com",
-        "password":"xxx"
-    }  ,
-    {
-        
-    "id":1,
-    "first_name":"pavi",
-    "last_name":"devi",
-    "email":"pavi@gmail.com",
+    "first_name":"Anisha",
+    "last_name":"J",
+    "email":"ani@gmail.com",
     "password":"xxx"
-     }  
+
+    
+    }
 ]
