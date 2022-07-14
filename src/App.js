@@ -1,43 +1,37 @@
-import * as React from 'react';
+ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-// import  Components  from './components/table';
-// import fs,{writeFile} from 'fs';
 import Table from './components/table';
-import JsonData from '../src/login.json';
-import fs,{writeFile} from 'fs';
+ 
+ import axios  from 'axios';
+
+ const baseURL = "http://localhost:3001/api/v1/login/push";
 
 
-export default function Submit() {
-
-  const handleSubmit = (event) => {
+ export default function Submit() {
+  const [postData, setPostData] = React.useState();
+   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    let dataValue = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    };
-    console.log("the data-->", dataValue)
+      let firstName= data.get('firstName');
+      let lastName= data.get('lastName');
+      let email= data.get('email');
+      let password=data.get('password');
+  const loginData={firstName,lastName,email,password}
+  
+    console.log("the data-->", loginData)
 
-    let result = JSON.stringify(dataValue, null, 2)
-    console.log(result)
-    writeData(result);
-     console.log( "Json file",JsonData );
-     console.log("result",result);
-  };
-function writeData(result){
-    fs.writeFile("../src/login.json",result,(err)=>{
-    if(err) throw err;
-   })
-  //  writeFile()
+  axios.post(baseURL, loginData)
+      .then((response) => {
+        let postData = response.data;
+        console.log(response);
+      })
+      
+};
 
-}
-// writeFile()
   return (
 
     <Container component="main" maxWidth="xs">
