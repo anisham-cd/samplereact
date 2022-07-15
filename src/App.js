@@ -8,11 +8,12 @@ import Table from './components/table';
  
  import axios  from 'axios';
 
- const baseURL = "http://localhost:3001/api/v1/login/push";
+ const baseURL = "http://localhost:3002/api/v1/login/push";
 
 
  export default function Submit() {
-  const [postData, setPostData] = React.useState();
+  
+ 
    const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,6 +24,7 @@ import Table from './components/table';
   const loginData={firstName,lastName,email,password}
   
     console.log("the data-->", loginData)
+    alert("---submitted successfully---")
 
   axios.post(baseURL, loginData)
       .then((response) => {
@@ -30,11 +32,10 @@ import Table from './components/table';
         console.log(response);
       })
       
+      
 };
-
-  return (
-
-    <Container component="main" maxWidth="xs">
+ return (
+   <Container component="main" maxWidth="xs">
       <Table />
       <Typography component="h1" variant="h5">
         Login
