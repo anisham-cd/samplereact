@@ -1,152 +1,123 @@
+
 import React, { useState, useEffect } from 'react';
-// import "src/App.css"
+ import Button from '@mui/material/Button';
+//  import Box from '@mui/material/Box'
+ import axios from 'axios';
+ import tableEdit from './tableEdit';
+
+import { TableContainer, Table, Paper, TableBody, TableCell, TableRow,TableHead} from '@mui/material';
+// import { textAlign } from '@mui/system';
+ import Typography from '@mui/material/Typography';
+// import EditIcon from '@mui/icons-material/Edit';
 function TableData() {
-     const [data, setData] = useState([])
-    const URL = "http://localhost:3002/api/v1/login/getloginData";
+
+    const [data, setData] = useState([])
+  
+    const getURL = "http://localhost:3002/api/v1/login/getloginData";
+     const editURL="http://localhost:3002/api/v1/login/edit";
+  
+   
     useEffect(() => {
         const fetchData = (() => {
-            fetch(URL)
+            fetch(getURL)
                 .then((res) =>
                     res.json())
-
                 .then((response) => {
-                    // console.log(response);
-                    // console.log("data-->",data)
-                    setData(response.data);
-                    console.log("---getting data---",data)
+                  setData(response.data);
+                  console.log("---getting data---", data)
                 })
-            })
-            fetchData()
-    });
-return (
-        <>
-            <h1>Table</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>FirstName</th>
-                        <th>LastName</th>
-                        <th>email</th>
-                        <th>password</th>
-                    </tr>
+        })
+        fetchData()
+    }, [])
+    
+// function onClick(event) {
+//     event.preventDefault();
 
+//     axios.put(editURL)
+//       .then((response) => {
+//         let data = response.data;
+//         console.log(response);
+//       })
+const detail = (data) => {
+     let id = data.id;
+     const data1 = { id };
+    console.log("hai data",data);
+    axios
+      .put(editURL, data)
+      .then((response) => {
+       let setPostData=(response.data);
+       let setRows=(response.data.data);
+      })
+
+    }
+
+    return (
+
+        <TableContainer component={Paper} sx={{ maxHeight: '300px'}}>
+            <tableEdit/>
+            <Typography component="h1" variant="h5" >
+                ---Login Table---
+            </Typography>
+
+            <Table>
+                <TableHead> 
+                    <TableRow>
+                        <TableCell align='center'>id</TableCell>
+                        <TableCell align='center'>FirstName</TableCell>
+                        <TableCell align='center'>LastName</TableCell>
+                        <TableCell align='center'>email</TableCell>
+                        <TableCell align='center'>password</TableCell>
+                    </TableRow>
+
+                </TableHead> 
+
+                <TableBody>
                     {data.map((item, i) => (
-                        <tr key={i}>
-                            <td>{item.firstName}</td>
-                            <td>{item.lastName}</td>
-                            <td>{item.email}</td>
-                            <td>{item.password}</td>
-                        </tr>
+                        
+                        <TableRow key={i}>
+                            <TableCell align='center'>{item.id}</TableCell>
+                            <TableCell align='center'>{item.firstName}</TableCell>
+                            <TableCell align='center'>{item.lastName}</TableCell>
+                            <TableCell align='center'>{item.email}</TableCell>
+                            <TableCell align='center'>{item.password}</TableCell>
+                            {/* <TableCell>{item.edit}</TableCell> */}
+                            <TableCell><Button
+                                variant="contained"
+                                style={{
+                                    color: "white",
+                                    margin: "10px",
+                                    background: "blue",
+                                }}
+                                onClick={() => detail(data)}>
+                                Edit
+                            </Button>
+                            </TableCell>
+                            </TableRow>
 
                     ))}
+                </TableBody>
 
-                </tbody>
+                {/*                            
+                            <Button
+          type="update"
+          fullWidth
+          variant="contained">
+          update
+        </Button> */}
+                {/* <button 
+               onClick={() => window.alert(`Clicked "Edit" for row`)}>
+                Edit
+              </button>
+              </Box> */}
+            </Table>
+            
+        </TableContainer>
 
-            </table>
-        </>
     );
 }
 
+
 export default TableData;
 
-// // function TableData(){
-// //    const tbldata=data.map(
-// //         (info)=>{
-// //             return(
-// //                 <tr>
-// //                     <td>{info.first_name}</td>
-// //                     <td>{info.last_name}</td>
-// //                     <td>{info.email}</td>
-// //                     <td>{info.password}</td>
-// //                 </tr> )
-// //                 axios.post(baseURL, loginData)
-// //                 .then((response) => {
-// //                   let data= response.data;
-// //                   console.log(response);
-// //                 })
-                
-// //   } )
- 
-// //   return(
-// //         <div>
-// //             <h1>--Data Table--</h1>
-// //             <table class="table table-striped">
-// //                 <thead>
-// //                     <tr>
-                   
-// //                     <th>first_name</th>
-// //                     <th>last_name</th>
-// //                     <th>email</th>
-// //                     <th>password</th>
-// //                     </tr>
-// //                 </thead>
-// //                 <tbody>
-// //                  {tbldata}
-                 
-// //                    </tbody>
-// //                     </table>
-// //                      </div>
-                     
-// //  ) 
- 
-
-// //   }
- 
-// // export default  TableData ;
-
-// import React, { useState, useEffect } from 'react';
-// // import '../tabledata.css';
- 
-// function TableData() {
-//     const [data, getData] = useState([])
-//     const URL = 'http://localhost:3002/api/v1/login/getloginData';
-
-//     useEffect(() => {
-//         //     fetchData()
-//         // }, [])
 
 
-//         // const fetchData = () => {
-//         fetch(URL)
-//             .then((res) =>
-//                 res.json())
-
-//             .then((response) => {
-//                 console.log(response);
-//                 getData(response);
-//             })
-//     })
-//     // }
-
-
-
-//     return (
-//         <>
-//           <table>
-            
-//             <tbody>
-// {/*           
-//             <h1>Table</h1> */}
-//                 <tr>
-//                     <th>firstName</th>
-//                     <th>lastName</th>
-//                     <th>email</th>
-//                     <th>password</th>
-//                 </tr>
-//                 {data.map((item, i) => (
-//                     <tr key={i}>
-//                         <td>{item.firstName}</td>
-//                         <td>{item.lastName}</td>
-//                         <td>{item.email}</td>
-//                         <td>{item.password}</td>
-//                     </tr>
-//                 ))}
-             
-//             </tbody>
-//             </table>
-
-//         </>
-//     );
-// }
-
-// export default TableData;
