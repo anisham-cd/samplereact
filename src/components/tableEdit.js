@@ -4,6 +4,15 @@ const editRow=()=>{
     return(
         <tr>
             <td>
+             <td>
+                <input
+                type='text'
+                required='required'
+                placeholder='Enter loginId...'
+                name='firstName'>
+                </input>
+            </td>
+            <td>
                 <input
                 type='text'
                 required='required'
@@ -21,7 +30,7 @@ const editRow=()=>{
             </td>
             <td>
             <input
-                type='text'
+                type='email'
                 required='required'
                 placeholder='Enter email...'
                 name='email'>
@@ -35,6 +44,8 @@ const editRow=()=>{
                 name='password'>
                 </input>
             </td>
+            </td>
         </tr>
     )
 }
+export default editRow;

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Table from './components/table';
+import  MaterialTable from '@mui/material/Table';
  
  import axios  from 'axios';
 
@@ -13,7 +14,7 @@ import Table from './components/table';
 
  export default function Submit() {
   
- 
+ const[filter,SetFilter]=React.useState(true)
    const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -71,16 +72,20 @@ import Table from './components/table';
           type="password"
           id="password"
         />
-
-
-
-        <Button
+         <Button
           type="submit"
           fullWidth
           variant="contained">
           Submit
         </Button>
       </Box>
+      <MaterialTable>
+        title="login Table",
+      
+        options=(
+          filtering=filter
+        );
+      </MaterialTable>
     </Container>
 
 
