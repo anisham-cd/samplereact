@@ -1,19 +1,26 @@
 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import EditLogin from './tableEdit';
+// import EditLogin from './tableEdit';
 import axios from 'axios';
-
+import TableEdit from '../components/tableEdit';
+// import { GlobalFilter } from './GlobalFilter';
 // import TableEdit from './tableEdit';
+// import Table1 from './table1';
+// import Login from '../login'
 import { TableContainer, Table, TableBody, TableCell, TableRow, TableHead, Box } from '@mui/material';
 // import { useNavigate } from "react-router-dom";
 // import { textAlign } from '@mui/system';
 import Typography from '@mui/material/Typography';
 
+// import e from 'cors';
+
 function TableData() {
-// const{Table,Columns}=useTable({Columns,data,},useFilters)
+    // const { state, setGlobalFilter } = useTable(useGlobalFilter)
+    // const { globalFilter } = state
     const [data, setData] = useState([])
     // const [editDataId, setDataId] = useState([])
+
 
     const getURL = "http://localhost:3002/api/v1/login/getloginData";
     const editURL = "http://localhost:3002/api/v1/login/edit";
@@ -29,8 +36,7 @@ function TableData() {
                     console.log("---getting data---", data)
                 })
         })
-        fetchData()
-    }, [])
+        fetchData()}, [])
 
     function detail(event) {
         event.preventDefault();
@@ -39,21 +45,26 @@ function TableData() {
             .then((response) => {
                 let data = response.data;
                 console.log(response);
+                console.log(data)
             })
         //         let navigate = useNavigate();
 
         //         const detail = (state) => {
         //           navigate(TableEdit, { state });
         //         };
+
+
     }
 
-    return (
-
-        <TableContainer sx={{ maxHeight: '300px', maxWidth: '900px' }}>
+return (
+<TableContainer sx={{ maxHeight: '500px', maxWidth: '1000px' }}>
+    {/* <Login/> */}
+    {/* <Table1/> */}
+    <TableEdit/>
             {/* <EditLogin/> */}
             {/* <form> */}
-
-            <Typography component="h1" variant="h5" >
+            {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/> */}
+            <Typography component="h1" variant="h5" textAlign={'center'}>
                 ---Login Table---
             </Typography>
             <Box component="form" onSubmit={detail} >
@@ -75,46 +86,21 @@ function TableData() {
                             <TableRow key={i}>
 
                                 <TableCell align='center'>{item.id}
-                                    <input
-                                        type='text'
-                                        required='required'
-                                        placeholder='Enter loginId...'
-                                        name='id'>
-                                    </input>
+
                                 </TableCell>
                                 <TableCell align='center'>{item.firstName}
-                                    <input
-                                        type='text'
-                                        required='required'
-                                        placeholder='Enter firstName...'
-                                        name='firstName'>
-                                    </input>
+
                                 </TableCell>
                                 <TableCell align='center'>{item.lastName}
-                                    <input
-                                        type='text'
-                                        required='required'
-                                        placeholder='Enter lastName...'
-                                        name='lastName'>
-                                    </input>
+
                                 </TableCell>
                                 <TableCell align='center'>{item.email}
-                                    <input
-                                        type='email'
-                                        required='required'
-                                        placeholder='Enter email...'
-                                        name='email'>
-                                    </input>
+
                                 </TableCell>
                                 <TableCell align='center'>{item.password}
-                                    <input
-                                        type='text'
-                                        required='required'
-                                        placeholder='Enter password...'
-                                        name='password'>
-                                    </input>
+
                                 </TableCell>
-                                {/* <TableCell>{item.edit}</TableCell> */}
+
                                 <TableCell><Button
                                     variant="contained"
                                     style={{
@@ -126,30 +112,25 @@ function TableData() {
                                     Edit
                                 </Button>
                                 </TableCell>
+
                             </TableRow>
 
-                        ))}
-                    </TableBody>
 
-                    {/*                            
-                            <Button
-          type="update"
-          fullWidth
-          variant="contained">
-          update
-        </Button> */}
-                    {/* <button 
-               onClick={() => window.alert(`Clicked "Edit" for row`)}>
-                Edit
-              </button>
-              </Box> */}
+                        ))}
+
+
+                    </TableBody>
                 </Table>
+
+
+
             </Box>
-            {/* </form> */}
+
         </TableContainer>
 
     );
 }
+
 
 
 export default TableData;
